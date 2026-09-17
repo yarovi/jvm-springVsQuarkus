@@ -1,3 +1,16 @@
 spring:
-  application:
-    name: spring-boot-app
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/quarkusdb
+    username: quarkus
+    password: quarkus
+    pool:
+      enabled: true
+      initial-size: 5
+      max-size: 20
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+server:
+  port: 8080
