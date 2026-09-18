@@ -11,7 +11,7 @@ import org.jboss.logging.Logger;
 
 import java.net.URI;
 import java.util.List;
-@Path("/products")
+@Path("api/products")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ProductResource {

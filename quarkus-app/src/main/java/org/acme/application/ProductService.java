@@ -1,5 +1,6 @@
 package org.acme.application;
 
+import io.quarkus.hibernate.reactive.panache.common.WithSession;
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -19,6 +20,7 @@ public class ProductService {
   @Inject
   ProductRepository repository;
 
+  @WithSession
   public Uni<List<Product>> findAll() {
     LOG.infof(
         "[SERVICE] findAll thread=%s",
@@ -28,10 +30,12 @@ public class ProductService {
 
 
 
+  @WithSession
   public Uni<Product> findById(Long id) {
     return repository.findById(id);
   }
 
+  @WithSession
   @WithTransaction
   public Uni<Product> create(Product product) {
     product.id = null;
@@ -40,6 +44,7 @@ public class ProductService {
         .replaceWith(product);
   }
 
+  @WithSession
   @WithTransaction
   public Uni<Product> update(
       Long id,
@@ -51,6 +56,8 @@ public class ProductService {
 
           product.name = request.name;
           product.price = request.price;
+          product.description = request.description;
+          product.stock = request.stock;
 
           return product;
         });

@@ -1,9 +1,6 @@
 package org.acme.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
@@ -12,10 +9,14 @@ import java.math.BigDecimal;
 public class Product {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   public Long id;
 
   public String name;
 
+  public String description;
+
   public BigDecimal price;
+
+  public int stock;
 }
